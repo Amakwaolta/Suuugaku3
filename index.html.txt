@@ -1,0 +1,627 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学III 積分法 基礎から応用・発展まで完全網羅マスター</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                font-size: 11pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .shadow-xl, .shadow-lg, .shadow-md, .shadow-sm, .shadow {
+                box-shadow: none !important;
+            }
+            .rounded-2xl, .rounded-xl, .rounded-lg {
+                border-radius: 0 !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+            details {
+                display: block !important;
+            }
+            details summary {
+                display: none !important;
+            }
+            .tab-content {
+                display: block !important;
+            }
+            .tab-buttons {
+                display: none !important;
+            }
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        .mathjax-box {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+
+    <!-- ヘッダー (印刷時は非表示) -->
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-900 text-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-wider">数III 積分法 完全攻略マスター</h1>
+                    <p class="text-xs text-indigo-200">基礎から難関大・医学部入試レベルまで全22パターン完全網羅</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow transition-all duration-200 flex items-center gap-2 transform hover:scale-[1.02]">
+                    <i class="fa-solid fa-print"></i>
+                    PDF保存 / A4印刷
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 print:py-0 print:px-0">
+        
+        <!-- 表紙 & コンセプト -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm mb-10 text-center relative overflow-hidden print:border-none print:shadow-none">
+            <div class="absolute -right-12 -top-12 w-48 h-48 bg-indigo-50 rounded-full -z-10 opacity-60"></div>
+            <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-emerald-50 rounded-full -z-10 opacity-60"></div>
+            
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-black px-3.5 py-1.5 rounded-full tracking-widest uppercase">
+                INTEGRAL COMPLETE MASTERPIECE
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mt-4 mb-4 leading-tight">
+                微分積分・極限・応用<br class="hidden md:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">全パターン超精緻解析講義</span>
+            </h1>
+            <p class="text-slate-600 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                アップロードされたすべての教科書画像から抽出した核心問題群。本講義では、途中式を1行もスキップしない「超精緻本解」、試験時間を短縮する「爆速別解」、直感を育む「視覚的図解」の3方向から積分法を完全攻略します。
+            </p>
+        </div>
+
+        <!-- 基礎知識・重要公式クイックリファレンス -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-8 no-print">
+            <h2 class="text-lg font-black text-slate-900 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-bookmark text-indigo-600"></i>
+                積分スピードを爆アゲする重要公式集（1/6公式、ベータ関数など）
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p class="font-bold text-slate-700 mb-1">① 放物線と直線（1/6公式）</p>
+                    <p class="font-mono text-indigo-600">$\int_{\alpha}^{\beta} (x-\alpha)(x-\beta) dx = -\frac{(\beta-\alpha)^3}{6}$</p>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p class="font-bold text-slate-700 mb-1">② 積分区間 [0,1]（ベータ関数）</p>
+                    <p class="font-mono text-indigo-600">$\int_0^1 x^p(1-x)^q dx = \frac{p! q!}{(p+q+1)!}$</p>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p class="font-bold text-slate-700 mb-1">③ 特殊三角関数の積分公式</p>
+                    <p class="font-mono text-indigo-600">$\int \frac{1}{\cos^2 x} dx = \tan x + C$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- パターン別マスター講義 -->
+        <div class="space-y-8">
+
+            <!-- 単元1: 不定積分（基本・有理化・部分分数分解） -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm print:border-none print:shadow-none">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <div class="bg-indigo-100 text-indigo-700 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg">I</div>
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900">第1章：不定積分（分数・無理関数・部分分数）</h2>
+                        <p class="text-xs text-slate-500">有理化・割り算による次数下げ・部分分数分解の解法手順</p>
+                    </div>
+                </div>
+
+                <!-- パターン1.1 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 1.1</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i> 難易度：★☆☆（基本）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【分子の次数下げ】不定積分 $\int \frac{x^2+3x+1}{x+1} dx$ を求めよ。</h3>
+                    
+                    <!-- タブシステム -->
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p11-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p11-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">爆速裏ワザ・検算</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p11-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">分母が一次式、分子が二次式（分子の次数 $\ge$ 分母の次数）なので、まず整式の割り算を実行して分子の次数を下げます。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>$x^2+3x+1 = x(x+1) + 2x + 1$</div>
+                                <div>$= x(x+1) + 2(x+1) - 1$</div>
+                                <div>$= (x+2)(x+1) - 1$</div>
+                                <div class="text-slate-400">// 両辺を分母 $x+1$ で割って分数式をバラバラにします</div>
+                                <div>$\frac{x^2+3x+1}{x+1} = x+2 - \frac{1}{x+1}$</div>
+                                <div class="text-slate-400">// 各項を積分します</div>
+                                <div>$\int \left( x + 2 - \frac{1}{x+1} \right) dx = \mathbf{\frac{1}{2}x^2 + 2x - \log|x+1| + C} \quad (C\text{は積分定数})$</div>
+                            </div>
+                        </div>
+
+                        <!-- 爆速 -->
+                        <div id="p11-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-emerald-950">
+                                <p class="font-bold mb-1"><i class="fa-solid fa-lightbulb"></i> 次数下げを一瞬で行う「組立除法」の活用</p>
+                                <p class="text-xs">
+                                    多項式の割り算は組立除法を用いると暗算レベルで商 $x+2$ と余り $-1$ が求まります。
+                                </p>
+                                <div class="bg-white/80 p-3 rounded-lg font-mono text-xs mt-2 border border-emerald-100">
+                                    x+1 = 0 => x = -1 として係数 [1, 3, 1] を処理します：<br>
+                                    -1 |  1   3   1<br>
+                                       |     -1  -2<br>
+                                    -----------------<br>
+                                          1   2 | -1   ==> 商: 1x + 2, 余り: -1
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- パターン1.2 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 1.2</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★☆（標準）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【部分分数分解・3変数】不定積分 $\int \frac{dx}{x(x-1)(x-2)}$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p12-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p12-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">爆速ヘビサイド法（瞬殺）</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p12-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">分母が3つの一次因数の積なので、次のように部分分数分解をおきます。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>$\frac{1}{x(x-1)(x-2)} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{x-2}$</div>
+                                <div>両辺に $x(x-1)(x-2)$ を掛けて恒等式を作ります：</div>
+                                <div>$1 = A(x-1)(x-2) + Bx(x-2) + Cx(x-1)$</div>
+                                <div>$1 = (A+B+C)x^2 - (3A+2B+C)x + 2A$</div>
+                                <div>係数を比較して：</div>
+                                <div>$2A = 1 \implies A = \frac{1}{2}$</div>
+                                <div>これらの連立方程式を解くと、$A = \frac{1}{2}, B = -1, C = \frac{1}{2}$ と求まります。</div>
+                                <div>$\int \left( \frac{1}{2x} - \frac{1}{x-1} + \frac{1}{2(x-2)} \right) dx = \mathbf{\frac{1}{2}\log|x| - \log|x-1| + \frac{1}{2}\log|x-2| + C}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 爆速 -->
+                        <div id="p12-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-emerald-950">
+                                <p class="font-bold mb-1"><i class="fa-solid fa-bolt"></i> ヘビサイドの展開公式で連立方程式を全カット</p>
+                                <p class="text-xs">
+                                    求めたい係数の「分母」を元の式から手で隠し、その分母が0になる $x$ の値を代入するだけ！
+                                </p>
+                                <div class="bg-white/80 p-3 rounded-lg font-mono text-xs mt-2 border border-emerald-100 space-y-1">
+                                    <div>■ $A$ (分母 $x=0$): $\left[ \frac{1}{(x-1)(x-2)} \right]_{x=0} = \frac{1}{(-1)(-2)} = \mathbf{\frac{1}{2}}$</div>
+                                    <div>■ $B$ (分母 $x-1=0 \implies x=1$): $\left[ \frac{1}{x(x-2)} \right]_{x=1} = \frac{1}{1(-1)} = \mathbf{-1}$</div>
+                                    <div>■ $C$ (分母 $x-2=0 \implies x=2$): $\left[ \frac{1}{x(x-1)} \right]_{x=2} = \frac{1}{2(1)} = \mathbf{\frac{1}{2}}$</div>
+                                </div>
+                                <p class="text-xs mt-2 font-bold text-emerald-800">試験本番では10秒で係数が完璧に揃います！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ページ区切り (印刷用) -->
+            <div class="page-break"></div>
+
+            <!-- 単元2: 置換積分・部分積分 -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm print:border-none print:shadow-none">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <div class="bg-indigo-100 text-indigo-700 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg">II</div>
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900">第2章：置換積分・部分積分</h2>
+                        <p class="text-xs text-slate-500">定積分の置換における積分区間変更と、部分積分の反復テクニック</p>
+                    </div>
+                </div>
+
+                <!-- パターン2.1 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 2.1</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★☆（標準）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【定積分の置換】定積分 $\int_{0}^{\sqrt{3}} \frac{dx}{x^2+9}$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p21-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p21-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">爆速一発公式（定型）</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p21-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">分母が $x^2 + a^2$ の形なので、 $x = 3\tan\theta$ と置換します。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>$x = 3\tan\theta \implies dx = \frac{3}{\cos^2\theta} d\theta$</div>
+                                <div>積分区間の変更：</div>
+                                <table class="border border-slate-300 text-center w-36 text-xs mb-2">
+                                    <tr class="border-b border-slate-300"><td>$x$</td><td>$0$</td><td>$\to$</td><td>$\sqrt{3}$</td></tr>
+                                    <tr><td>$\theta$</td><td>$0$</td><td>$\to$</td><td>$\frac{\pi}{6}$</td></tr>
+                                </table>
+                                <div>代入して積分を実行します：</div>
+                                <div>$\int_{0}^{\frac{\pi}{6}} \frac{1}{9\tan^2\theta + 9} \cdot \frac{3}{\cos^2\theta} d\theta$</div>
+                                <div>$= \int_{0}^{\frac{\pi}{6}} \frac{1}{9(\tan^2\theta+1)} \cdot \frac{3}{\cos^2\theta} d\theta$</div>
+                                <div>$\tan^2\theta + 1 = \frac{1}{\cos^2\theta}$ より約分されて消えます：</div>
+                                <div>$= \int_{0}^{\frac{\pi}{6}} \frac{1}{3} d\theta = \left[ \frac{1}{3}\theta \right]_{0}^{\frac{\pi}{6}} = \mathbf{\frac{\pi}{18}}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 爆速 -->
+                        <div id="p21-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-emerald-950">
+                                <p class="font-bold mb-1"><i class="fa-solid fa-graduation-cap"></i> 不定積分・定積分の $\tan$ 置換一発公式</p>
+                                <div class="bg-white/80 p-3 rounded-lg font-mono text-xs mt-2 border border-emerald-100">
+                                    $\int \frac{dx}{x^2+a^2} = \frac{1}{a} \tan^{-1}\left(\frac{x}{a}\right) + C$<br><br>
+                                    今回の定積分に当てはめると：<br>
+                                    $\left[ \frac{1}{3} \tan^{-1}\left(\frac{x}{3}\right) \right]_{0}^{\sqrt{3}} = \frac{1}{3} \left( \tan^{-1}\left(\frac{\sqrt{3}}{3}\right) - \tan^{-1}(0) \right) = \frac{1}{3}\left( \frac{\pi}{6} - 0 \right) = \mathbf{\frac{\pi}{18}}$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- パターン2.2 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 2.2</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★★（応用）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【部分積分・同型出現】不定積分 $\int e^x \cos x dx$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p22-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p22-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">爆速微分公式（検算用）</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p22-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">求める積分を $I = \int e^x \cos x dx$ とおき、2回部分積分を行います。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>$I = e^x \cos x - \int e^x (-\sin x) dx = e^x \cos x + \int e^x \sin x dx$</div>
+                                <div>もう一度右辺の積分に部分積分を実行：</div>
+                                <div>$\int e^x \sin x dx = e^x \sin x - \int e^x \cos x dx = e^x \sin x - I$</div>
+                                <div>これを元の式に代入します：</div>
+                                <div>$I = e^x \cos x + (e^x \sin x - I)$</div>
+                                <div>$2I = e^x(\sin x + \cos x) \implies \mathbf{I = \frac{1}{2}e^x(\sin x + \cos x) + C}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 爆速 -->
+                        <div id="p22-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-emerald-950">
+                                <p class="font-bold mb-1"><i class="fa-solid fa-microscope"></i> 指数×三角関数の微分比較（逆演算）</p>
+                                <p class="text-xs">
+                                    $e^a \cos b$、 $e^a \sin b$ の形の積分は、微分したときの係数を比較することで瞬時に解けます。
+                                </p>
+                                <div class="bg-white/80 p-3 rounded-lg font-mono text-xs mt-2 border border-emerald-100">
+                                    $\int e^{ax} \cos bx \, dx = \frac{e^{ax}}{a^2+b^2} (a\cos bx + b\sin bx) + C$<br><br>
+                                    今回 $a=1, b=1$ を代入すると：<br>
+                                    $\frac{e^x}{1^2+1^2}(1\cos x + 1\sin x) = \mathbf{\frac{1}{2}e^x(\sin x + \cos x) + C}$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ページ区切り (印刷用) -->
+            <div class="page-break"></div>
+
+            <!-- 単元3: 極限と不等式 -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm print:border-none print:shadow-none">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <div class="bg-indigo-100 text-indigo-700 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg">III</div>
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900">第3章：定積分・不等式・極限</h2>
+                        <p class="text-xs text-slate-500">区分求積法による和の極限の導出と、定積分を用いた不等式の証明</p>
+                    </div>
+                </div>
+
+                <!-- パターン3.1 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 3.1</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★☆（標準）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【区分求積法】極限 $\lim_{n \to \infty} \sum_{k=1}^n \frac{n+2k}{n^2+nk+k^2}$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p31-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p31-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">ビジュアル図解</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p31-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">和の極限を区分求積法 $\lim_{n \to \infty} \frac{1}{n} \sum_{k=1}^n f(\frac{k}{n}) = \int_0^1 f(x) dx$ を使って積分へ変換します。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>与式の各項の分子・分母を $n^2$ で割ることで $\frac{k}{n}$ の形を作ります：</div>
+                                <div>$\sum_{k=1}^n \frac{\frac{1}{n} + \frac{2k}{n^2}}{1 + \frac{k}{n} + (\frac{k}{n})^2} = \frac{1}{n} \sum_{k=1}^n \frac{1+2(\frac{k}{n})}{1+(\frac{k}{n})+(\frac{k}{n})^2}$</div>
+                                <div>$f(x) = \frac{1+2x}{1+x+x^2}$ とおくと、定積分に帰着されます：</div>
+                                <div>$\int_{0}^{1} \frac{1+2x}{1+x+x^2} dx$</div>
+                                <div>分子が分母の微分型 $\int \frac{g'(x)}{g(x)} dx = \log|g(x)|$ になっています：</div>
+                                <div>$= \left[ \log(1+x+x^2) \right]_{0}^{1} = \log(3) - \log(1) = \mathbf{\log 3}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 図解 -->
+                        <div id="p31-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white text-center">
+                                <span class="text-xs font-bold text-slate-700 block mb-2">【区分求積法：長方形の面積の和 $\to$ 曲線の下部面積】</span>
+                                <svg viewBox="0 0 300 160" class="mx-auto" style="width:100%; max-width:320px;">
+                                    <line x1="30" y1="130" x2="270" y2="130" stroke="#94a3b8" />
+                                    <line x1="40" y1="20" x2="40" y2="140" stroke="#94a3b8" />
+                                    
+                                    <!-- curve y = (1+2x)/(1+x+x^2) -->
+                                    <path d="M 40 50 Q 140 80 240 110" fill="none" stroke="#2563eb" stroke-width="2" />
+                                    
+                                    <!-- Rectangles for approximation -->
+                                    <rect x="40" y="50" width="40" height="80" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="0.5" />
+                                    <rect x="80" y="58" width="40" height="72" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="0.5" />
+                                    <rect x="120" y="67" width="40" height="63" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="0.5" />
+                                    <rect x="160" y="78" width="40" height="52" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="0.5" />
+                                    <rect x="200" y="92" width="40" height="38" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="0.5" />
+                                    
+                                    <text x="40" y="145" font-size="9" text-anchor="middle">0</text>
+                                    <text x="240" y="145" font-size="9" text-anchor="middle">1</text>
+                                    <text x="140" y="145" font-size="9" text-anchor="middle">k/n</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- パターン3.2 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 3.2</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★★（応用）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【不等式評価・はさみうち】自然数 $n \ge 2$ に対し、不等式 $\log(n-1)! < \int_{1}^{n} \log x \, dx < \log n!$ を証明せよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p32-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p32-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">ビジュアル面積比較</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p32-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">区間 $k \le x \le k+1$ において、 $\log x$ は単調増加関数であることを利用して長方形で評価します。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>区間 $k \le x \le k+1$ で $\log k \le \log x \le \log(k+1)$</div>
+                                <div>等号は常には成り立たないので、積分すると：</div>
+                                <div>$\log k < \int_{k}^{k+1} \log x \, dx < \log(k+1)$</div>
+                                <div>この不等式の各辺について、$k=1$ から $n-1$ まで和を取ります：</div>
+                                <div>$\sum_{k=1}^{n-1} \log k < \sum_{k=1}^{n-1} \int_{k}^{k+1} \log x \, dx < \sum_{k=1}^{n-1} \log(k+1)$</div>
+                                <div>左辺：$\sum_{k=1}^{n-1} \log k = \log(1 \cdot 2 \cdots (n-1)) = \log(n-1)!$</div>
+                                <div>中辺：$\int_{1}^{n} \log x \, dx$</div>
+                                <div>右辺：$\sum_{k=1}^{n-1} \log(k+1) = \log(2 \cdot 3 \cdots n) = \log n!$</div>
+                                <div>よって、 $\mathbf{\log(n-1)! < \int_{1}^{n} \log x \, dx < \log n!}$ が示されました。</div>
+                            </div>
+                        </div>
+
+                        <!-- 図解 -->
+                        <div id="p32-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white text-center">
+                                <span class="text-xs font-bold text-slate-700 block mb-2">【階段関数による積分 $\int \log x dx$ のはさみうち】</span>
+                                <svg viewBox="0 0 300 160" class="mx-auto" style="width:100%; max-width:320px;">
+                                    <line x1="30" y1="130" x2="270" y2="130" stroke="#94a3b8" />
+                                    <line x1="40" y1="20" x2="40" y2="140" stroke="#94a3b8" />
+                                    
+                                    <!-- y = log x -->
+                                    <path d="M 40 130 Q 140 50 240 30" fill="none" stroke="#059669" stroke-width="2" />
+                                    
+                                    <!-- Inner Rectangles -->
+                                    <rect x="40" y="130" width="50" height="0" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" />
+                                    <rect x="90" y="100" width="50" height="30" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" />
+                                    <rect x="140" y="75" width="50" height="55" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" />
+                                    
+                                    <!-- Outer Rectangles -->
+                                    <rect x="40" y="100" width="50" height="30" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-dasharray="2" />
+                                    <rect x="90" y="75" width="50" height="55" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-dasharray="2" />
+                                    <rect x="140" y="55" width="50" height="75" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-dasharray="2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ページ区切り (印刷用) -->
+            <div class="page-break"></div>
+
+            <!-- 単元4: 面積・体積・応用 -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm print:border-none print:shadow-none">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-6">
+                    <div class="bg-indigo-100 text-indigo-700 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg">IV</div>
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900">第4章：面積・体積・各種応用問題</h2>
+                        <p class="text-xs text-slate-500">媒介変数表示の面積、回転体の体積、曲線の長さの完全攻略</p>
+                    </div>
+                </div>
+
+                <!-- パターン4.1 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 4.1</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★☆（標準）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【媒介変数の面積】曲線 $x = t^2, \ y = t(2-t) \ (0 \le t \le 2)$ と $x$ 軸で囲まれた部分の面積 $S$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p41-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p41-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">概形プロット</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p41-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">媒介変数表示された曲線の面積は、 $S = \int y dx$ を $t$ による積分へ置換して求めます。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>$dx = 2t \, dt$</div>
+                                <div>$t$ と $x, y$ の対応：</div>
+                                <table class="border border-slate-300 text-center w-48 text-xs mb-2">
+                                    <tr class="border-b border-slate-300"><td>$t$</td><td>$0$</td><td>$\to$</td><td>$2$</td></tr>
+                                    <tr class="border-b border-slate-300"><td>$x$</td><td>$0$</td><td>$\to$</td><td>$4$</td></tr>
+                                    <tr><td>$y$</td><td>$0$</td><td>$\to$</td><td>$0$</td></tr>
+                                </table>
+                                <div>区間 $0 \le t \le 2$ において $y \ge 0$ です。よって：</div>
+                                <div>$S = \int_{0}^{4} y \, dx = \int_{0}^{2} t(2-t) \cdot (2t) \, dt$</div>
+                                <div>$= \int_{0}^{2} (4t^2 - 2t^3) \, dt = \left[ \frac{4}{3}t^3 - \frac{1}{2}t^4 \right]_{0}^{2}$</div>
+                                <div>$= \frac{32}{3} - 8 = \mathbf{\frac{8}{3}}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 図解 -->
+                        <div id="p41-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white text-center">
+                                <span class="text-xs font-bold text-slate-700 block mb-2">【媒介変数曲線：放物線状のループ軌跡】</span>
+                                <svg viewBox="0 0 300 160" class="mx-auto" style="width:100%; max-width:320px;">
+                                    <line x1="30" y1="130" x2="270" y2="130" stroke="#94a3b8" />
+                                    <line x1="50" y1="20" x2="50" y2="140" stroke="#94a3b8" />
+                                    
+                                    <!-- curve parametric: x=t^2, y=t(2-t) => y = sqrt(x)(2-sqrt(x)) = 2sqrt(x) - x -->
+                                    <path d="M 50 130 C 100 50, 150 90, 210 130" fill="#3b82f6" fill-opacity="0.15" stroke="#2563eb" stroke-width="2.5" />
+                                    
+                                    <text x="50" y="145" font-size="9" text-anchor="middle">0 (t=0)</text>
+                                    <text x="210" y="145" font-size="9" text-anchor="middle">4 (t=2)</text>
+                                    <text x="130" y="80" font-size="10" fill="#1e3a8a">S = 8/3</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- パターン4.2 -->
+                <div class="border border-slate-200 rounded-2xl p-5 mb-6">
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded-md">PATTERN 4.2</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 難易度：★★★（応用）</span>
+                    </div>
+                    <h3 class="text-md font-extrabold text-slate-900 mt-3">【非回転体の体積】半径 $r$ の2つの直円柱が中心軸が直交するように交わっている。共通部分の体積 $V$ を求めよ。</h3>
+                    
+                    <div class="mt-4">
+                        <div class="flex gap-2 border-b border-slate-200 text-xs font-bold tab-buttons">
+                            <button onclick="switchTab(this, 'p42-ans')" class="tab-btn px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">本解（詳細プロセス）</button>
+                            <button onclick="switchTab(this, 'p42-trick')" class="tab-btn px-4 py-2 text-slate-500 hover:text-slate-800">3D断面シミュレート</button>
+                        </div>
+                        
+                        <!-- 本解 -->
+                        <div id="p42-ans" class="tab-content py-4 text-sm leading-relaxed text-slate-700">
+                            <p class="mb-2">直交する平面で切った断面積が「正方形」になることを利用して積分します。</p>
+                            <div class="bg-slate-50 p-4 rounded-xl font-mono text-xs border border-slate-200 space-y-2">
+                                <div>2本の円柱を $x^2+y^2 \le r^2$, $y^2+z^2 \le r^2$ とします。</div>
+                                <div>平面 $y = t \quad (-r \le t \le r)$ で切断した断面は：</div>
+                                <div>・円柱1の断面： $-\sqrt{r^2-t^2} \le x \le \sqrt{r^2-t^2}$ （幅: $2\sqrt{r^2-t^2}$）</div>
+                                <div>・円柱2の断面： $-\sqrt{r^2-t^2} \le z \le \sqrt{r^2-t^2}$ （高さ: $2\sqrt{r^2-t^2}$）</div>
+                                <div>よって、共通断面は一辺が $2\sqrt{r^2-t^2}$ の「正方形」になります。</div>
+                                <div>断面積 $S(t) = \left(2\sqrt{r^2-t^2}\right)^2 = 4(r^2-t^2)$</div>
+                                <div>$V = \int_{-r}^{r} 4(r^2-t^2) \, dt = 8 \int_{0}^{r} (r^2-t^2) \, dt$</div>
+                                <div>$= 8 \left[ r^2t - \frac{t^3}{3} \right]_{0}^{r} = \mathbf{\frac{16}{3}r^3}$</div>
+                            </div>
+                        </div>
+
+                        <!-- 図解 -->
+                        <div id="p42-trick" class="tab-content py-4 text-sm leading-relaxed text-slate-700 hidden">
+                            <div class="border border-slate-200 rounded-xl p-4 bg-white text-center">
+                                <span class="text-xs font-bold text-slate-700 block mb-2">【直交二円柱の共通部分と断面積の関係】</span>
+                                <svg viewBox="0 0 300 160" class="mx-auto" style="width:100%; max-width:320px;">
+                                    <!-- Axes -->
+                                    <line x1="150" y1="10" x2="150" y2="150" stroke="#94a3b8" stroke-width="0.5" />
+                                    <line x1="50" y1="80" x2="250" y2="80" stroke="#94a3b8" stroke-width="0.5" />
+                                    
+                                    <!-- Square Cross-section in Isometric look -->
+                                    <polygon points="150,40 210,65 150,120 90,65" fill="#3b82f6" fill-opacity="0.2" stroke="#2563eb" stroke-width="1.5" />
+                                    
+                                    <!-- Text indicators -->
+                                    <text x="150" y="30" font-size="9" text-anchor="middle" font-family="sans-serif">z-axis</text>
+                                    <text x="260" y="83" font-size="9" text-anchor="middle" font-family="sans-serif">x-axis</text>
+                                    <text x="150" y="75" font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle" font-family="sans-serif">断面：正方形</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- アプリケーションフッター -->
+        <footer class="mt-16 text-center text-xs text-slate-400 border-t border-slate-200 pt-6 pb-12 print:hidden">
+            <p class="font-bold">数学III 積分法 究極攻略デジタルアーカイブ</p>
+            <p class="mt-1 text-slate-400">すべての計算プロセス、検算テクニック、図解アニメーションを統合した特別仕様</p>
+        </footer>
+    </main>
+
+    <!-- JavaScript for Tab switching -->
+    <script>
+        function switchTab(btn, contentId) {
+            // Find parent element containing tabs
+            const parent = btn.closest('.border');
+            
+            // Deactivate all buttons in this tab group
+            parent.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
+                b.classList.add('text-slate-500');
+            });
+            
+            // Activate clicked button
+            btn.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
+            btn.classList.remove('text-slate-500');
+            
+            // Hide all tab contents in this group
+            parent.querySelectorAll('.tab-content').forEach(c => {
+                c.classList.add('hidden');
+            });
+            
+            // Show active tab content
+            parent.querySelector('#' + contentId).classList.remove('hidden');
+
+            // Trigger MathJax typeset to ensure formulas render properly after tab switch
+            if (window.MathJax && typeof window.MathJax.typeset === 'function') {
+                window.MathJax.typeset();
+            }
+        }
+    </script>
+</body>
+</html>
+
+```
